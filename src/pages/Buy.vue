@@ -66,9 +66,8 @@ export default {
 	},
 	mounted () {
 		this.isLogin = this.$store.state.mutation.isLogin
-		// console.log(this.isLogin)
 		document.documentElement.scrollTop = document.body.scrollTop = 0
-		this.news= this.$store.state.mutation.news
+		this.news= this.$store.state.mutation.news||{}
 		this.show = this.$store.state.mutation.show
 	},
 	methods: {

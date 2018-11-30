@@ -44,27 +44,27 @@ export default {
             this.$store.dispatch('setCurindex', 0)
 		},
 		addPic (e) {
-		     let vm = this;
-		     let add = document.querySelector('input[type=file]')
-		     add.click()
-		     return false;
+		    let vm = this;
+		    let add = document.querySelector('input[type=file]')
+		    add.click()
+		    return false;
 		},
 		fileInput (e) {
-		     var files = e.target.files
-		     console.log(files)
-		     if(!files.length) return;
-		     this.createImage(files, e);
+		    var files = e.target.files
+		    console.log(files)
+		    if(!files.length) return;
+		    this.createImage(files, e);
 		},
 	   	createImage (files, e) {
-		     let vm = this;
-		     // lrz图片先压缩在加载、
-		     this.lrz(files[0], { width: 480 }).then(function(rst) {
-		      vm.url = rst.base64;
-		      return rst;
-		     }).always(function() {
-		     // 清空文件上传控件的值
-		     e.target.value = null;
-		     });
+		    let vm = this;
+		    // lrz图片先压缩在加载、
+		    this.lrz(files[0], { width: 480 }).then(function(rst) {
+		      	vm.url = rst.base64;
+		      	return rst;
+		    }).always(function() {
+		     	// 清空文件上传控件的值
+		     	e.target.value = null;
+		    });
 		},
 		gologin () {
 			if(this.username ==''){

@@ -1,112 +1,112 @@
 <template>
-<div class="wrap">
-  <div class="show">
-    <div class="head">
-          <div class="close" @click="tohome">
-            <img  src="../assets/images/close.png" alt="">
-          </div>
-          <div class="title">发布</div>
-    </div>
-    <div class="block"></div>
-    <div class="inputcontainer">
-      <div class="inputdetail">
-        <input type="text" v-model="title" placeholder="标题 品类品牌型号都是买家喜欢搜索的">
-      </div>
-      <div class="inputdetail">
-        <input type="text" v-model="desc" placeholder="描述一下你的闲置">
-      </div>
-    </div>
-    <div class="image-list">
-     <div class="list-img" v-show="hasPhoto" @click.stop="addPic">
-       <img src="../assets/images/相机.png" />
-       <span class="choosephoto">请选择或者拍照上传照片</span>
-       <input hidden type="file" accept="image/jpeg,image/jpg,image/png" capture="camera" @change="fileInput" >
-     </div>
-     <ul class="list-ul" v-show="!hasPhoto">
-       <li class="list-li" v-for="(url, index) in imgUrls">
-         <div class="list-link" >
-          <img :src="url">
-         </div>
-         <span class="cancleimg" @click='delImage(index)'></span>
-       </li>
-       <li class="list-li-add">
-        <span class="add-img" @click.stop="addPic"></span>
-       </li>
-     </ul>
-    </div>
-    <div class="addr">
-      <p class="localadress">{{addr}}</p>
-    </div>
-    <div class="goodinfo">
-      <div class="border">
-        <ul class="topname">
-          <router-link to='/addpic'  class="item selected" data-name="price" @click.native="setSelected">开个价</router-link>
-          <router-link to='/addpic/content2' class="item" data-name="sell" @click.native="setSelected">拍卖</router-link>
-          <li class="item" @click="noprice">不谈钱</li>
-        </ul>
-      </div>
-      <div class="contentwrap">
-        <router-view :show="show" :kind="kind"></router-view>
-      </div>
-    </div>
-    <div class="block"></div>
-    <div class="footer">
-      <button class="fabu" @click="publish">确定发布</button>
-    </div>
-  </div>
-  <div class="maskbox">
-          <div class="mask">
-            <div class="line1">
-              <div class="inputbox inputbox1">
-                <span class="label">价格</span>
-                <div type="text" class="text active" id="text" data-content="" data-id="0" @click.stop="binddata">
-                </div>
-              </div>
-              <div class="inputbox">
-                <span class="label">原价</span>
-                <div type="text" class="text" id="text" data-content="" data-id="1" @click.stop="binddata"></div>
-              </div>
+  <div class="wrap">
+    <div class="show">
+      <div class="head">
+            <div class="close" @click="tohome">
+              <img  src="../assets/images/close.png" alt="">
             </div>
-            <div class="line2"> 
-              <div class="inputbox">
-              <span class="label">运费</span>
-              <div type="text" class="text" id="text" data-content="" data-id="2" @click.stop="binddata"></div>
-              </div>
-            </div>
-            <div class="selfinput">
-              <div class="grids">
-                <p  class="grid" data-value="1"@click="num">1</p>
-                <p  class="grid" data-value="2"@click="num">2</p>
-                <p  class="grid" data-value="3"@click="num">3</p>
-                <p  class="grid" data-value="4"@click="num">4</p>
-                <p  class="grid" data-value="5"@click="num">5</p>
-                <p  class="grid" data-value="6"@click="num">6</p>
-                <p  class="grid" data-value="7"@click="num">7</p>
-                <p  class="grid" data-value="8"@click="num">8</p>
-                <p  class="grid" data-value="9"@click="num">9</p>
-                <p  class="grid" data-value="0"@click="num">0</p>
-                <p  class="grid" data-value="."@click="num">.</p>
-                <p  class="grid key" @click="hidemask"></p>
-              </div>
-              <div class="operate" >
-                <span href="" class="grid del" @click="del"></span>
-                <button class="grid assure"  @click="assure">确定</button>
-              </div>
-          </div>
-          </div>
-  </div>
-  <div class="maskbox1">
-    <div class="head">
-      <div class="back" @click="hidden">
-        <img  src="../assets/images/返回.png" alt="">
+            <div class="title">发布</div>
       </div>
-      <div class="title">类目</div>
+      <div class="block"></div>
+      <div class="inputcontainer">
+        <div class="inputdetail">
+          <input type="text" v-model="title" placeholder="标题 品类品牌型号都是买家喜欢搜索的">
+        </div>
+        <div class="inputdetail">
+          <input type="text" v-model="desc" placeholder="描述一下你的闲置">
+        </div>
+      </div>
+      <div class="image-list">
+      <div class="list-img" v-show="hasPhoto" @click.stop="addPic">
+        <img src="../assets/images/相机.png" />
+        <span class="choosephoto">请选择或者拍照上传照片</span>
+        <input hidden type="file" accept="image/jpeg,image/jpg,image/png" capture="camera" @change="fileInput" >
+      </div>
+      <ul class="list-ul" v-show="!hasPhoto">
+        <li class="list-li" v-for="(url,index) in imgUrls" :key="index">
+          <div class="list-link" >
+            <img :src="url">
+          </div>
+          <span class="cancleimg" @click='delImage(index)'></span>
+        </li>
+        <li class="list-li-add">
+          <span class="add-img" @click.stop="addPic"></span>
+        </li>
+      </ul>
+      </div>
+      <div class="addr">
+        <p class="localadress">{{addr}}</p>
+      </div>
+      <div class="goodinfo">
+        <div class="border">
+          <ul class="topname">
+            <router-link to='/addpic' class="item selected" data-name="price" @click.native="setSelected">开个价</router-link>
+            <router-link to='/addpic/content2' class="item" data-name="sell" @click.native="setSelected">拍卖</router-link>
+            <li class="item" @click="noprice">不谈钱</li>
+          </ul>
+        </div>
+        <div class="contentwrap">
+          <router-view :show="show" :kind="kind"></router-view>
+        </div>
+      </div>
+      <div class="block"></div>
+      <div class="footer">
+        <button class="fabu" @click="publish">确定发布</button>
+      </div>
     </div>
-    <div class="block1"></div>
-    <div class="container" >
-       <div class="item" v-for="item in items" :data-name="item.name" key="item.id" @click="selectItem">{{item.name}}</div>
+    <div class="maskbox">
+      <div class="mask">
+        <div class="line1">
+          <div class="inputbox inputbox1">
+            <span class="label">价格</span>
+            <div type="text" class="text active" id="text" data-content="" data-id="0" @click.stop="binddata">
+            </div>
+          </div>
+          <div class="inputbox">
+            <span class="label">原价</span>
+            <div type="text" class="text" id="text" data-content="" data-id="1" @click.stop="binddata"></div>
+          </div>
+        </div>
+        <div class="line2"> 
+          <div class="inputbox">
+          <span class="label">运费</span>
+          <div type="text" class="text" id="text" data-content="" data-id="2" @click.stop="binddata"></div>
+          </div>
+        </div>
+        <div class="selfinput">
+          <div class="grids">
+            <p  class="grid" data-value="1" @click="num">1</p>
+            <p  class="grid" data-value="2" @click="num">2</p>
+            <p  class="grid" data-value="3" @click="num">3</p>
+            <p  class="grid" data-value="4" @click="num">4</p>
+            <p  class="grid" data-value="5" @click="num">5</p>
+            <p  class="grid" data-value="6" @click="num">6</p>
+            <p  class="grid" data-value="7" @click="num">7</p>
+            <p  class="grid" data-value="8" @click="num">8</p>
+            <p  class="grid" data-value="9" @click="num">9</p>
+            <p  class="grid" data-value="0" @click="num">0</p>
+            <p  class="grid" data-value="." @click="num">.</p>
+            <p  class="grid key" @click="hidemask"></p>
+          </div>
+          <div class="operate" >
+            <span href="" class="grid del" @click="del"></span>
+            <button class="grid assure"  @click="assure">确定</button>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+    <div class="maskbox1">
+      <div class="head">
+        <div class="back" @click="hidden">
+          <img  src="../assets/images/返回.png" alt="">
+        </div>
+        <div class="title">类目</div>
+      </div>
+      <div class="block1"></div>
+      <div class="container" >
+        <div class="item" v-for="item in items" :key="item.id" @click="selectItem">{{item.name}}</div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -114,28 +114,28 @@ import Content1 from '../components/Content1'
 import {mapGetters,mapActions} from 'vuex'
 import {Toast,MessageBox} from 'mint-ui'
 import util from '../assets/js/util.js'
- export default {
-   components: {
-    Content1
-   },
-   data () {
-     return {
-       imgUrls: [],
-       hasPhoto: true,
-       addr: '',
-       selected: true,
-       id: '0',
-       show: false,
-       kind: '',
-       items: '',
-       price: '',
-       primecost: '',
-       freight: '',
-       title: '',
-       desc: ''
-     }
-   },
-   mounted () {
+  export default {
+    components: {
+      Content1
+    },
+    data () {
+      return {
+        imgUrls: [],
+        hasPhoto: true,
+        addr: '',
+        selected: true,
+        id: '0',
+        show: false,
+        kind: '',
+        items: '',
+        price: '',
+        primecost: '',
+        freight: '',
+        title: '',
+        desc: ''
+      }
+    },
+    mounted () {
       this.axios.get('https://easy-mock.com/mock/593787f691470c0ac107cacf/category/kind')
       .then((response) => {
         this.items = response.data.data
@@ -146,32 +146,34 @@ import util from '../assets/js/util.js'
       })
       this.num()
       console.log(this.items)
-   },
-   watch: {
-     imgUrls: 'showAddpic'
-   },
-   methods: {
-     binddata (event) {
-       if(document.querySelector('.active'))  {
-            document.querySelector('.active').classList.remove('active')
-          }
+    },
+    watch: {
+      imgUrls: 'showAddpic'
+    },
+    methods: {
+      binddata (event) {
+        if(document.querySelector('.active'))  {
+          document.querySelector('.active').classList.remove('active')
+        }
         event.currentTarget.classList.add('active')
         this.id = event.currentTarget.dataset.id
-     },
-     num (event) {
-         let contents = document.querySelectorAll('.inputbox .text')
-         let value = event.currentTarget.dataset.value
-         contents[this.id].innerHTML += value
-     },
-     del () {
+      },
+      num (event) {
+        let contents = document.querySelectorAll('.inputbox .text');
+        let value = '';
+        if (event) {
+          value = event.currentTarget.dataset.value;
+        }
+        contents[this.id].innerHTML += value;
+      },
+      del () {
         let contents = document.querySelectorAll('.inputbox .text')
         let value = contents[this.id] .innerHTML
         console.log(value)
         let newvalue=value.substring(0,value.length-1);
-        // console.log(newvalue)
         contents[this.id].innerHTML= newvalue
-     },
-     assure () {
+      },
+      assure () {
         let contents = document.querySelectorAll('.inputbox .text')
         let price = document.querySelector('.price')
         price.value = contents[0].innerHTML
@@ -185,60 +187,59 @@ import util from '../assets/js/util.js'
         this.freight = freight
         this.show = true
         this.hidemask()
-        // console.log(price)
-     },
-     setSelected () {
+      },
+      setSelected () {
         if(document.querySelector('.selected'))  {
-            document.querySelector('.selected').classList.remove('selected')
-          }
+          document.querySelector('.selected').classList.remove('selected')
+        }
         event.currentTarget.classList.add('selected')
-     },
-     hidemask () {
+      },
+      hidemask () {
         let mask = document.querySelector('.maskbox')
         mask.style.display = 'none'
-     },
-     tohome () {
+      },
+      tohome () {
         this.$router.push({path: '/'})
         this.$store.dispatch('setCurindex', 0)
-     },
-     showAddpic () {
-       let vm = this;
-       if(vm.imgUrls.length >= 1) {
-        vm.hasPhoto = false;
-       } else {
-        vm.hasPhoto = true;
-       }
-   },
-   publish () {
-      if(this.title == ''){
-        Toast('请输入发布的标题')
-        return;
-      }
-      if(this.desc == ''){
-        Toast('描述一下宝贝吧')
-        return;
-      }
-      if(this.imgUrls == ''){
-        MessageBox.alert('上传几张宝贝图片吧~~如果无法上传，请确定是否开启拍照权限，如果仍无效果，请移步其他浏览器')
-        return;
-      }
-      if(this.price == ''){
-        Toast('输入价钱')
-        return;
-      }
-      if(this.primecost == ''){
-        Toast('原价多少？')
-        return;
-      }
-      if(this.freight == ''){
-        Toast('邮费不能为空')
-        return;
-      }
-      if(this.kind == '') {
-        Toast('请选择分类')
-        return;
-      }
-       MessageBox.alert('发布成功，去看看吧！').then(action => {
+      },
+      showAddpic () {
+        let vm = this;
+        if(vm.imgUrls.length >= 1) {
+          vm.hasPhoto = false;
+        } else {
+          vm.hasPhoto = true;
+        }
+      },
+      publish () {
+        if(this.title == ''){
+          Toast('请输入发布的标题')
+          return;
+        }
+        if(this.desc == ''){
+          Toast('描述一下宝贝吧')
+          return;
+        }
+        if(this.imgUrls == ''){
+          MessageBox.alert('上传几张宝贝图片吧~~如果无法上传，请确定是否开启拍照权限，如果仍无效果，请移步其他浏览器')
+          return;
+        }
+        if(this.price == ''){
+          Toast('输入价钱')
+          return;
+        }
+        if(this.primecost == ''){
+          Toast('原价多少？')
+          return;
+        }
+        if(this.freight == ''){
+          Toast('邮费不能为空')
+          return;
+        }
+        if(this.kind == '') {
+          Toast('请选择分类')
+          return;
+        }
+        MessageBox.alert('发布成功，去看看吧！').then(action => {
           let obj = {}
           obj.title = this.title
           obj.desc = this.desc
@@ -255,46 +256,46 @@ import util from '../assets/js/util.js'
           this.$router.push('/my')
           this.$store.dispatch('setCurindex',4)
         });
-   },
-   selectItem (e) {
-      let name = e.currentTarget.dataset.name
-      this.kind = name
-      this.hidden()
-    },
-   hidden (){
-       let mask1 = document.querySelector('.maskbox1')
+      },
+      selectItem (e) {
+        let name = e.currentTarget.dataset.name
+        this.kind = name
+        this.hidden()
+      },
+      hidden (){
+        let mask1 = document.querySelector('.maskbox1')
         mask1.style.display = 'none'
-   },
-   addPic (e) {
-     let vm = this;
-     let add = document.querySelector('input[type=file]')
-     add.click()
-     return false
-   },
-   fileInput (e) {
-     var files = e.target.files || e.dataTransfer.files
-     if(!files.length) return
-     this.createImage(files, e)
-   },
-   createImage (file, e) {
-     let vm = this
-     // lrz图片先压缩在加载、
-     this.lrz(file[0], { width: 480 }).then(function(rst) {
-      vm.imgUrls.push(rst.base64)
-      return rst
-     }).always(function() {
-     // 清空文件上传控件的值
-     e.target.value = null
-     })
-   },
-   delImage (index) {
-     let vm = this
-     vm.imgUrls.splice(index, 1)
-   },
-    noprice () {
-      Toast('贴子仅能在鱼塘发布，你附近没有鱼塘，去别的地方转转吧~')
+      },
+      addPic (e) {
+        let vm = this;
+        let add = document.querySelector('input[type=file]')
+        add.click()
+        return false
+      },
+      fileInput (e) {
+        var files = e.target.files || e.dataTransfer.files
+        if(!files.length) return
+        this.createImage(files, e)
+      },
+      createImage (file, e) {
+        let vm = this
+        // lrz图片先压缩在加载、
+        this.lrz(file[0], { width: 480 }).then(function(rst) {
+          vm.imgUrls.push(rst.base64)
+          return rst
+        }).always(function() {
+          // 清空文件上传控件的值
+          e.target.value = null
+        })
+      },
+      delImage (index) {
+        let vm = this
+        vm.imgUrls.splice(index, 1)
+      },
+      noprice () {
+        Toast('贴子仅能在鱼塘发布，你附近没有鱼塘，去别的地方转转吧~')
+      }
     }
-  }
  }  
 </script>
 <style lang="css" scoped>

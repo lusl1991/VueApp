@@ -73,7 +73,7 @@
 </template>
 <script>
 import {mapGetters,mapActions} from 'vuex'
-import {Toast} from 'mint-ui'
+import {Toast, MessageBox} from 'mint-ui'
 import NavBottom from '@/components/NavBottom'
 export default {
 	components: {
@@ -86,7 +86,7 @@ export default {
 	},
 	mounted () {
 		this.$store.dispatch('setCurindex', 1)
-			console.log(this.$store.state.mutation.curindex)
+		console.log(this.$store.state.mutation.curindex)
 		let username = window.localStorage.getItem('username')
 		this.$store.dispatch('setUsername', username)
 		this.isLogin = this.$store.state.mutation.isLogin
@@ -101,9 +101,22 @@ export default {
 			this.$router.push({path:'/login'})
 		},
 		logout () {
-			window.localStorage.clear()
-			this.$store.dispatch('noLogin')
-            this.$router.push({path: '/my'});
+			MessageBox.confirm("你确定要退出登录吗？").then(action => {
+				window.localStorage.clear()
+				this.$store.dispatch('noLogin')
+				this.$store.dispatch('setCurindex', 0)
+				
+				Toast({
+					message: '欢迎下次登录',
+					duration: 1000
+				});
+				setTimeout(()=>{
+					this.$router.push({path: '/login'});
+				},600)
+
+			}).catch(error => {
+				Toast('取消登录');
+			})
 		},
 		fabu () {
 			if(!this.isLogin){
@@ -122,30 +135,28 @@ export default {
 			
 		},
 		loadImg () {
-		     let vm = this;
-		     let add = document.querySelector('input[type=file]')
-		     add.click()
-
-		     return false;
+		    let vm = this;
+		    let add = document.querySelector('input[type=file]')
+		    add.click()
+		    return false;
 		},
 		fileInput (e) {
-		     var files = e.target.files
-		     console.log(files)
-		     if(!files.length) return;
-		     this.createImage(files, e);
+		    var files = e.target.files
+		    console.log(files)
+		    if(!files.length) return;
+		    this.createImage(files, e);
 		},
 	   	createImage (files, e) {
-		     let vm = this;
-		     // lrz图片先压缩在加载、
-		     this.lrz(files[0], { width: 480 }).then(function(rst) {
-		      vm.url = rst.base64;
-		      window.localStorage.setItem('useravatar',vm.url)
-		      return rst;
-		     }).always(function() {
-		     // 清空文件上传控件的值
-		     e.target.value = null;
-		     });
-
+		    let vm = this;
+		    // lrz图片先压缩在加载、
+		    this.lrz(files[0], { width: 480 }).then(function(rst) {
+		      	vm.url = rst.base64;
+		      	window.localStorage.setItem('useravatar',vm.url)
+		      	return rst;
+		    }).always(function() {
+		     	// 清空文件上传控件的值
+		     	e.target.value = null;
+		    });
 		},
 	}
 }

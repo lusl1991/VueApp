@@ -27,7 +27,7 @@
 				</region-picker>
 			</div>
 			<div class="set settext">
-				<textarea v-model="detail" name="moreaddr" placeholder="详细地址"id="more" cols="30" rows="5"></textarea>
+				<textarea v-model="detail" name="moreaddr" placeholder="详细地址" id="more" cols="30" rows="5"></textarea>
 			</div>
 		</div>
 	</div>

@@ -1,84 +1,84 @@
 <template>
-<div class="news">
-<mt-navbar :class="totop?'fixed':'mint-navbar'" v-model="selected">
-  <mt-tab-item id="1"><p class="f14">新鲜的</p></mt-tab-item>
-  <mt-tab-item id="2"><p class="f14">附近的</p></mt-tab-item>
-</mt-navbar>
-<!-- tab-container -->
-<mt-tab-container class="container" v-model="selected">
-  <mt-tab-container-item class="container-item" id="1">
-    <div class="mt-cell" v-for="data in news" :key="data.id" @click="buygood">
-    	<div class="head">
-    		<img :src="data.avatar" class="avatar" alt="">
-    		<div class="info">
-    			<p class="title">{{data.name}}</p>
-    			<p class="time">{{data.time}}</p>
-    		</div>
-    		<span class="price">{{data.price}}</span>
-    	</div>
-    	<div class="imgbox">
-    		<img :src="data.img" class="show" alt="">
-    	</div>
-    	<div class="detail">
-    		<p class="desc">{{data.desc}}</p>
-    	</div>
-    	<div class="bottom">
-    		<div class="addr">{{data.add}}</div>
-    		<div class="kind">{{data.kind}}</div>
-    		<div class="star" v-if="data.star !== '' ">{{data.star}}</div>
-    		<div class="star" v-if="data.num !== '' ">{{data.num}}</div>
-    	</div>
-    </div>
-    <div class="swiper-box">
-    <swiper :options="swiperOption">
-        <swiper-slide v-for="date in recoms" :key="date.title">
-        	<router-link to="/" class="item">
-        		<div class="title">{{date.title}}</div>
-        		<div class="info">
-        			<span class="fabu">发布数 {{date.members}}</span>
-        			<span class="hot">昨日人气 +{{date.num}}</span>
-        		</div>
-        		<div class="desc">
-        			<span class="gonggao">公告</span>
-        			<span class="produ">{{date.produ}}</span>
-        		</div>
-        		<div class="imgbox" >
-        			<img class="display" v-for="image in date.images" :key="image.img" :src="image.img" alt="">
-        		</div>
-        		<div class="addr">
-        			<p class="destance">距离你{{date.destance}}米</p>
-        		</div>
-        	</router-link>
-        </swiper-slide>
-      </swiper>
-      </div>
-  </mt-tab-container-item>
-  <mt-tab-container-item class="container-item" id="2">
-    <div class="mt-cell" v-for="data in nears" :key="data.name">
-    	<div class="head">
-    		<img :src="data.avatar" class="avatar" alt="">
-    		<div class="info">
-    			<p class="title">{{data.name}}</p>
-    			<p class="time">{{data.time}}</p>
-    		</div>
-    		<span class="price">{{data.price}}</span>
-    	</div>
-    	<div class="imgbox">
-    		<img :src="data.img" class="show" alt="">
-    	</div>
-    	<div class="detail">
-    		<p class="desc">{{data.desc}}</p>
-    	</div>
-    	<div class="bottom">
-    		<div class="addr">{{data.add}}</div>
-    		<div class="kind">{{data.kind}}</div>
-    		<div class="star" v-if="data.star !== '' ">{{data.star}}</div>
-    		<div class="star" v-if="data.num !== '' ">{{data.num}}</div>
-    	</div>
-    </div>
-  </mt-tab-container-item>
-</mt-tab-container>
-</div>
+	<div class="news">
+		<mt-navbar :class="totop?'fixed':'mint-navbar'" v-model="selected">
+			<mt-tab-item id="1"><p class="f14">新鲜的</p></mt-tab-item>
+			<mt-tab-item id="2"><p class="f14">附近的</p></mt-tab-item>
+		</mt-navbar>
+		<!-- tab-container -->
+		<mt-tab-container class="container" v-model="selected">
+			<mt-tab-container-item class="container-item" id="1">
+				<div class="mt-cell" v-for="data in news" :key="data.id" @click="buygood">
+					<div class="head">
+						<img :src="data.avatar" class="avatar" alt="">
+						<div class="info">
+							<p class="title">{{data.name}}</p>
+							<p class="time">{{data.time}}</p>
+						</div>
+						<span class="price">{{data.price}}</span>
+					</div>
+					<div class="imgbox">
+						<img :src="data.img" class="show" alt="">
+					</div>
+					<div class="detail">
+						<p class="desc">{{data.desc}}</p>
+					</div>
+					<div class="bottom">
+						<div class="addr">{{data.add}}</div>
+						<div class="kind">{{data.kind}}</div>
+						<div class="star" v-if="data.star !== '' ">{{data.star}}</div>
+						<div class="star" v-if="data.num !== '' ">{{data.num}}</div>
+					</div>
+				</div>
+				<div class="swiper-box">
+				<swiper :options="swiperOption">
+					<swiper-slide v-for="(date,index) in recoms" :key="index">
+						<router-link to="/" class="item">
+							<div class="title">{{date.title}}</div>
+							<div class="info">
+								<span class="fabu">发布数 {{date.members}}</span>
+								<span class="hot">昨日人气 +{{date.num}}</span>
+							</div>
+							<div class="desc">
+								<span class="gonggao">公告</span>
+								<span class="produ">{{date.produ}}</span>
+							</div>
+							<div class="imgbox" >
+								<img class="display" v-for="image in date.images" :key="image.img" :src="image.img" alt="">
+							</div>
+							<div class="addr">
+								<p class="destance">距离你{{date.destance}}米</p>
+							</div>
+						</router-link>
+					</swiper-slide>
+				</swiper>
+				</div>
+			</mt-tab-container-item>
+			<mt-tab-container-item class="container-item" id="2">
+				<div class="mt-cell" v-for="(data,index) in nears" :key="index">
+					<div class="head">
+						<img :src="data.avatar" class="avatar" alt="">
+						<div class="info">
+							<p class="title">{{data.name}}</p>
+							<p class="time">{{data.time}}</p>
+						</div>
+						<span class="price">{{data.price}}</span>
+					</div>
+					<div class="imgbox">
+						<img :src="data.img" class="show" alt="">
+					</div>
+					<div class="detail">
+						<p class="desc">{{data.desc}}</p>
+					</div>
+					<div class="bottom">
+						<div class="addr">{{data.add}}</div>
+						<div class="kind">{{data.kind}}</div>
+						<div class="star" v-if="data.star !== '' ">{{data.star}}</div>
+						<div class="star" v-if="data.num !== '' ">{{data.num}}</div>
+					</div>
+				</div>
+			</mt-tab-container-item>
+		</mt-tab-container>
+	</div>
 </template>
 <script>
 import {mapActions} from 'vuex'
@@ -201,7 +201,8 @@ export default {
 	},
 	methods: {
 		menu() {
-			var Height= document.querySelector('.news').offsetTop;
+			var dom = document.querySelector('.news')||{};
+			var Height= dom.offsetTop||0;
 			console.log(Height)
 			console.log(this.scroll)
 			this.scroll = document.body.scrollTop;
@@ -213,7 +214,6 @@ export default {
 			}
 		},
 		buygood (event) {
-			// let Hub = new Vue()
 			let id = event.currentTarget.dataset.id
 			console.log(this.news[id-1])
 			this.$store.dispatch('setNews', this.news[id-1])

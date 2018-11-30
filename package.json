@@ -1,8 +1,8 @@
 {
-  "name": "VueApp",
+  "name": "vue-app",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "Sukura7 1248352739@qq.com",
+  "author": "lusl1991@163.com",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
@@ -12,13 +12,14 @@
   "dependencies": {
     "axios": "^0.16.1",
     "babel-plugin-component": "^0.9.1",
-    "china-area-data": "^3.0.0",
+    "china-area-data": "^4.0.0",
     "mint-ui": "^2.2.7",
     "node-sass": "^4.5.3",
     "sass-loader": "^6.0.5",
     "vue": "^2.2.6",
     "vue-awesome-swiper": "^2.4.2",
     "vue-region-picker": "^3.0.1",
+    "v-distpicker": "^1.0.21",
     "vue-router": "^2.3.1",
     "vuex": "^2.3.1",
     "lrz": "^4.9.40"

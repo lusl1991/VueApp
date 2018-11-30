@@ -2,7 +2,7 @@
 <div>
 <div class="chatlist" :class="showBox>0?'popbox':'listbottom'">
     <ul>
-        <div v-for="item in talks" :key="item.type">
+        <div v-for="(item,index) in talks" :key="index">
             <li class="user" v-if="item.type==1">
                 <div class="chat-user"><img :src="url"></div>
                 <div class="time"><span><i>{{item.time}}</i>{{name}}</span></div>
@@ -141,6 +141,7 @@ export default {
                     content: '你好！'
                 });
             },100);
+            console.log(this.talks);
             // 清空文本框
             this.content='';
             // 当消息列表达到一定的高度

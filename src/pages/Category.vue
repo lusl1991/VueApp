@@ -9,8 +9,9 @@
 		<div class="block"></div>
 		<div class="navbar">
 			<div class="nav">
-				<div  class="item" :data-url="category.url" v-for="category in categories" key="category.id" :data-name="category.name"
-				@click="selecteItem">{{category.name}}</div>
+				<div class="item" :data-url="category.url" v-for="category in categories" :key="category.id" :data-name="category.name" @click="selecteItem">
+					{{category.name}}
+				</div>
 			</div>
 			<div class="content">
 			  <div class="topbox">

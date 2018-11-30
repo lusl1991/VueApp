@@ -149,14 +149,16 @@ export default {
       top () {
         var oTop = document.documentElement.scrollTop || document.body.scrollTop; 
         var clientHeight = document.documentElement.clientHeight;
-        var obtn = document.getElementById('btn')
+        var obtn = document.getElementById('btn');
         console.log(obtn)
         console.log(oTop)
         console.log(clientHeight)
-        if(oTop >= clientHeight){  //如果滚动高度大于可视区域高度，则显示回到顶部按钮
-            obtn.style.display = 'block';
-        }else{         //否则隐藏
-            obtn.style.display = 'none';
+        if (obtn) {
+          if(oTop >= clientHeight){  //如果滚动高度大于可视区域高度，则显示回到顶部按钮
+              obtn.style.display = 'block';
+          }else{         //否则隐藏
+              obtn.style.display = 'none';
+          }
         }
         //主要用于判断当 点击回到顶部按钮后 滚动条在回滚过程中，若手动滚动滚动条，则清除定时器
         if(!this.isTop){

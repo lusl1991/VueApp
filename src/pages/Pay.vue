@@ -50,12 +50,11 @@ export default {
 		}
 	},
 	mounted () {
-		let str = this.$store.state.mutation.news.price
+		this.news = this.$store.state.mutation.news||{}
+		let str = this.news.price||''
 		let price = str.replace('￥','')
-		this.news = this.$store.state.mutation.news
-		this.addr =this.$store.state.mutation.addr
-		this.all = parseFloat(price)+
-					parseFloat(this.$store.state.mutation.news.freight)
+		this.addr =this.$store.state.mutation.addr||{}
+		this.all = parseFloat(price)+parseFloat(this.news.freight||0)
 		console.log(this.$store.state.mutation.addr)
 	},
 	methods: {
@@ -94,7 +93,7 @@ export default {
 						Obj.price = this.all
 						Obj.id = this.news.id
 						Obj.name = this.news.name
-						Obj.avatar = this.news.avatar
+						Obj.avatar = this.news.avatar||''
 						Obj.receive = true
 						Obj.del = false
 						console.log(Obj)

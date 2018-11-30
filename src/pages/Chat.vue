@@ -38,7 +38,7 @@ export default {
 	mounted () {
 		document.documentElement.scrollTop = document.body.scrollTop = 0
 		this.username = this.$store.state.mutation.username
-		this.news= this.$store.state.mutation.news
+		this.news= this.$store.state.mutation.news||{}
 	},
 	methods: {
 		buy () {
