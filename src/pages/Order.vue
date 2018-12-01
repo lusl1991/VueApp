@@ -7,7 +7,7 @@
 			<div class="title">我买到的</div>
 		</div>
 		<div class="block"></div>
-		<div v-if="show" class="thingbox" v-for="item in orders" key="item.id">
+		<div v-if="show" class="thingbox" v-for="item in orders" :key="item.id">
 			<div class="infobox">
 				<img :src="item.img" alt="">
 				<div class="info">
@@ -17,7 +17,7 @@
 			</div>
 			<div class="operate">
 				<div class="connect" @click="connect">联系卖家</div>
-				<div class="assure" v-if=" item.receive"@click="receive(item)" >确认收货</div>
+				<div class="assure" v-if=" item.receive" @click="receive(item)" >确认收货</div>
 				<div class="del" v-if="item.del" @click="delorder(item)">删除订单</div>
 			</div>
 		</div>
@@ -43,18 +43,15 @@ export default {
 	},
 	mounted () {
 		this.orders = this.$store.state.mutation.buyinfo
-		console.log(Array.from(this.orders).length)
 		this.noOrder()
 	},
 	methods: {
 		connect () {
-			console.log('sfjsd')
 			this.$router.push({path: '/chat'})
 		},
 		receive (e) {
 			let i = this.orders.indexOf(e)
 			this.ID = i
-			console.log(i)
 			let obj = {}
 			obj.receive = false
 			obj.index = i
@@ -79,11 +76,9 @@ export default {
 			this.$store.dispatch('setCurindex',4)
 		},
 		noOrder () {
-			console.log(Array.from(this.orders).length)
 			if(Array.from(this.orders).length===0){
 				this.show = false
 				this.hide = true
-				console.log(this.show)
 			}else{
 				this.show = true
 				this.hide = false
@@ -129,7 +124,6 @@ export default {
 	display: -webkit-flex;
 	display: flex;
 	flex-direction: column;
-	/*align-items: center;*/
 	background-color: #fff;
 	margin: 0 auto;
 	margin-top: 1rem;
@@ -202,7 +196,6 @@ export default {
 .del {
 	border: 1px solid #666;
 	color: #666;
-	/*display: none;*/
 }
 .nothingbox{
 	width: 100%;

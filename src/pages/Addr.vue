@@ -9,25 +9,34 @@
 		</div>
 		<div class="addrbox">
 			<div class="set">
-				<label for="" class="label" >收货人</label>
-				<input  type="text" v-model="name">
+				<label for="" class="label" >收货人:</label>
+				<input  type="text" v-model="addressForm.name">
 			</div>
 			<div class="set">
-				<label for="" class="label">联系电话</label>
-				<input type="tel"  v-model="tel">
+				<label for="" class="label">联系电话:</label>
+				<input type="tel"  v-model="addressForm.phone">
 			</div>
-			<div class="set setadd">
-				<label for="" class="label">地址</label>
-				<region-picker 
-				  auto
-				  :province.sync="region.province" 
-				  :city.sync="region.city"
-				  :district.sync="region.district"
-				  @onchange="change">
-				</region-picker>
+			<div class="set" @click="()=>addressVisible=true">
+				<label for="" class="label">所在地区:</label>
+				<input type="text" :value="(addressForm.province + addressForm.city + addressForm.area)||''" placeholder="">
 			</div>
-			<div class="set settext">
-				<textarea v-model="detail" name="moreaddr" placeholder="详细地址" id="more" cols="30" rows="5"></textarea>
+			<div>
+				<mt-popup v-model="addressVisible" position="bottom" class="address-pricker">
+					<div class="address-picker-header">
+					<p>配送至</p>
+					<span class="picker-close" @click="reset">&times;</span>
+					</div>
+					<v-distpicker :placeholders="{ province: '请选择', city: '请选择', district: '请选择' }" wrapper="address-pricker-wrapper" type="mobile"
+					@selected="onSelected"></v-distpicker>
+				</mt-popup>
+			</div>
+			<div class="set">
+				<label for="" class="label">详细地址:</label>
+				<input type="text" v-model="addressForm.address" name="moreaddr" placeholder="街道、楼牌号">
+			</div>
+			<div class="set">
+				<label for="" class="label">设为默认地址:</label>
+				<mt-switch v-model="addressForm.selected"></mt-switch>
 			</div>
 		</div>
 	</div>
@@ -35,54 +44,63 @@
 <script>
 import {mapActions} from 'vuex'
 import {Toast} from 'mint-ui'
+import VDistpicker from 'v-distpicker'
 export default {
+	components: {
+      VDistpicker
+    },
 	data () {
 		return {
-			region: {},
-			name: '',
-			tel: '',
-			detail: '',
-			site: []
+			addressForm: {
+				name: '',
+				phone: '',
+				province: '',
+				city: '',
+				area: '',
+				address: '',
+				selected: false
+			},
+			addressVisible: false
 		}
 	},
 	methods: {
 		save () {
-			console.log(this.detail)
-			if (this.name == '') {
+			if (this.addressForm.name == '') {
 				Toast('请填写收货人姓名')
 				return
 			}
-			if (this.tel == '') {
+			if (this.addressForm.phone == '') {
 				Toast('请填写电话号码')
 				return
 			}
-			if (this.site.length == 0) {
-				Toast('请选择城市')
+			if (this.addressForm.province == '' || this.addressForm.city == '' || this.addressForm.area == '') {
+				Toast('请选择所在地区')
 				return
 			}
-			if (this.detail == '') {
+			if (this.addressForm.address == '') {
 				Toast('请填写详细地址，让宝贝早点找到你')
 				return
 			}
-			var addr = {}
-			addr.name = this.name
-			addr.tel = this.tel
-			addr.detail = this.detail
-			addr.site = this.site
-			console.log(addr.site[0])
-			this.$store.dispatch('setAddr',addr)
+			this.$store.dispatch('setAddr',this.addressForm)
 			Toast('保存成功')
 			this.$router.push({path:'/pay'})
-			// console.log(this.$store.state.mu)
 		},
-		change (e) {
-			this.site = [e.province,e.city,e.district]
-			console.log(this.site)
+		onSelected(data) {
+			this.addressVisible = false;
+			this.addressForm.province = data.province.value;
+			this.addressForm.city = data.city.value;
+			this.addressForm.area = data.area.value;
+		},
+		reset() {
+			this.addressVisible = false;
+			this.addressForm.province = '';
+			this.addressForm.city = '';
+			this.addressForm.area = '';
 		}
 	}
 }
 </script>
-<style lang="css" scoped>
+<style lang="scss" scoped>
 .wrap {
 	width: 100%;
 	height: 100vh;
@@ -124,12 +142,6 @@ export default {
 	box-sizing: border-box;
 	border-bottom: 1px solid #f7f7f7
 }
-.setadd {
-	height: 10rem;
-}
-.settext {
-	height: 10rem;
-}
 .set .label {
 	width: 8rem;
 	font-size: 1.4rem;
@@ -145,10 +157,27 @@ export default {
 	border: none;
 	outline: none;
 }
-.region-picker {
-	display: -webkit-flex;
-	display: flex;
-	flex-direction: column;
-	line-height: 2.5;
+.address-pricker {
+	width: 100%;
+	height: 70%;
+	.address-picker-header {
+		position: relative;
+		p {
+			padding: 10px 0;
+			font-size: 15px;
+			color: #333;
+			text-align: center;
+		}
+		.picker-close {
+			position: absolute;
+			right: 10px;
+			bottom: 7px;
+			font-weight: normal;
+			font-size: 25px;
+			color: #999;
+			opacity: .7;
+		}
+	}
 }
+
 </style>

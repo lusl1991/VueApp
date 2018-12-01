@@ -24,8 +24,7 @@ import {mapActions} from 'vuex'
 		},
 		mounted() {
 			this.$store.dispatch('setCurindex', 3)
-			console.log(this.$store.state.mutation.curindex)
-		},
+		}
 	}
 </script>
 <style lang="css" scoped>

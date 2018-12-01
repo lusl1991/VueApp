@@ -9,7 +9,7 @@
 		<div class="block"></div>
 		<div class="navbar">
 			<div class="nav">
-				<div class="item" :data-url="category.url" v-for="category in categories" :key="category.id" :data-name="category.name" @click="selecteItem">
+				<div class="item" :data-url="category.url" v-for="category in categories" :key="category.id" @click="selecteItem">
 					{{category.name}}
 				</div>
 			</div>
@@ -21,7 +21,7 @@
 			  	<p class="newmes">每日新发</p>
 			  </div>
 			  <div class="container">
-			      <div class="content-item" v-for="item in items">
+			      <div class="content-item" v-for="(item, index) in items" :key="index">
 			      	<div class="flex">
 				        <div class="imgbox">
 				          <img :src="item.img" alt="">
@@ -39,22 +39,22 @@ export default {
 	methods: {
 		selecteItem () {
 			let oUrl = event.currentTarget.dataset.url
-			  this.title = event.currentTarget.dataset.name
-		      this.selected = oUrl
-		      if(document.querySelector('.selected'))  {
+			this.title = event.currentTarget.dataset.name
+		    this.selected = oUrl
+		    if(document.querySelector('.selected'))  {
 		        document.querySelector('.selected').classList.remove('selected')
-		      }
-		      event.currentTarget.classList.add('selected')
-		      this.axios.get('https://easy-mock.com/mock/593787f691470c0ac107cacf/category/' + oUrl)
-			        .then((response) => {
-			         	this.items = response.data.imglist
-        				console.log(response.data.imglist)
-			      })
-			      .catch(function (error) {
+		    }
+		    event.currentTarget.classList.add('selected')
+		    this.axios.get('https://easy-mock.com/mock/593787f691470c0ac107cacf/category/' + oUrl)
+			    .then((response) => {
+			        this.items = response.data.imglist
+        			console.log(response.data.imglist)
+			    })
+			    .catch(function (error) {
 			        console.log(error) 
-			      })
-			    }
-		    
+				}
+			)
+		}
 	},
 	data () {
 		return {
@@ -171,17 +171,17 @@ export default {
 		}
 	},
 	mounted () {
-	this.title = document.querySelectorAll('.item')[0].innerHTML
-	document.querySelectorAll('.item')[0].classList.add('selected')
-    this.axios.get('https://easy-mock.com/mock/593787f691470c0ac107cacf/category/house')
-      .then((response) => {
-        this.items = response.data.imglist
-        console.log(response.data.imglist)
-      })
-      .catch(function (error) {
-        console.log(error) 
-      })
-  },
+		this.title = document.querySelectorAll('.item')[0].innerHTML
+		document.querySelectorAll('.item')[0].classList.add('selected')
+		this.axios.get('https://easy-mock.com/mock/593787f691470c0ac107cacf/category/house')
+			.then((response) => {
+				this.items = response.data.imglist
+				console.log(response.data.imglist)
+			})
+			.catch(function (error) {
+				console.log(error) 
+			})
+  	},
 }
 </script>
 <style lang="css" scoped>

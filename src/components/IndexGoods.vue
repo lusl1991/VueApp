@@ -2,11 +2,11 @@
 	<div class="goodsbox">
         <ul class="goodslist">
 	        <li v-for="data in goodslist" :key="data.id" @click="util.toast">
-	          <div class="item">
-	            <p class="typelist-title">{{data.title}}</p>
-	            <p class="typelist-desc">{{data.desc}}</p>
-	            <img :src="data.src" class="typelist-img">
-	          </div>
+                <div class="item">
+                    <p class="typelist-title">{{data.title}}</p>
+                    <p class="typelist-desc">{{data.desc}}</p>
+                    <img :src="data.src" class="typelist-img">
+                </div>
 	    	</li>    
         </ul>
 	</div>
@@ -14,9 +14,9 @@
 <script>
 	export default {
 		props: {
-       	 goodslist: {
-       	 	type: Array
-       	 }
+       	    goodslist: {
+       	 	    type: Array
+       	    }
        }	
 	}
 </script>

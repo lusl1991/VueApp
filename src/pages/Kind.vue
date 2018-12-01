@@ -8,7 +8,7 @@
 		</div>
 		<div class="block"></div>
 		<div class="container" >
-			 <div class="item" v-for="item in items" :data-name="item.name" key="item.id" @click="selectItem">{{item.name}}</div>
+			 <div class="item" v-for="item in items" :key="item.id" @click="selectItem">{{item.name}}</div>
 		</div>
 	</div>
 </template>
@@ -34,7 +34,6 @@ export default {
 			let name = e.currentTarget.dataset.name;
 			window.localStorage.setItem('name', name)
 			this.$router.push({path: '/addpic'})
-
 		}
 	}
 }

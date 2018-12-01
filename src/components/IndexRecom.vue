@@ -2,13 +2,13 @@
 	<div class="typewrap">
 		<ul class="typelist">
 			<li v-for="data in typelist" :key="data.id">
-	          <div class="item" @click="util.toast">
-	          <div class="text">
-	            <p class="typelist-title">{{data.title}}</p>
-	            <p class="typelist-desc">{{data.desc}}</p>
-	           </div>
-	            <img :src="data.src" class="typelist-img">
-	          </div>
+				<div class="item" @click="util.toast">
+				<div class="text">
+					<p class="typelist-title">{{data.title}}</p>
+					<p class="typelist-desc">{{data.desc}}</p>
+				</div>
+					<img :src="data.src" class="typelist-img">
+				</div>
 	    	</li>    
 		</ul>
 	</div>
@@ -16,10 +16,10 @@
 <script>
 	export default {
 		props: {
-       	 typelist: {
-       	 	type: Array
-       	 }
-       }	
+			typelist: {
+				type: Array
+			}
+       	}	
 	}
 </script>
 <style lang="css" scoped>

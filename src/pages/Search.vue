@@ -13,7 +13,7 @@
 		</div>
 		<div class="resultwrap" v-if="result">
 			<div class="title"><span class="key">{{key}}</span></div>
-			<div class="result"  v-for="(item,index) in items" key="item.id">
+			<div class="result"  v-for="item in items" :key="item.id">
 				<img :src="item.image" alt="">
 				<p class="desc">{{item.desc}}</p>
 				<p class="price">￥{{item.price}}</p>
@@ -75,7 +75,6 @@ export default {
 }
 </script>
 <style lang="css" scoped>
-/*@import '../assets/imags/css/search.css'*/
 .wrap {
 	width: 100%;
 	height: 100vh;

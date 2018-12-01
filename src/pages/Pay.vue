@@ -17,8 +17,8 @@
 		<div class="addr" @click="setaddr">
 			<label for="" class="label">收货地址</label>
 			<div class="address" v-if="addr.name != undefined">
-				<p class="user">{{addr.name}}{{addr.tel}}</p>
-				<p class="addrdetail">{{addr.site[0]}}{{addr.site[1]}}{{addr.site[2]}}{{addr.detail}}</p>
+				<p class="user">{{addr.name}}{{addr.phone}}</p>
+				<p class="addrdetail">{{addr.province}}{{addr.city}}{{addr.area}}{{addr.address}}</p>
 			</div>
 			<div class="address" v-else>
 				<p class="addrdetail">请选择地址</p>
